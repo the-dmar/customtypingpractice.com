@@ -1,6 +1,13 @@
-import sentences from "../text/sentences"
-import getRandomArrayItem from "../utils/getRandomArrayItem"
+import useGuidedText from "../hooks/useTypingText"
 
 export default function Home() {
-  return <p>{getRandomArrayItem(sentences)}</p>
+  const [text, newText, input, handleInput] = useGuidedText()
+
+  return (
+    <>
+      <button onClick={newText}>Get New</button>
+      <p>{text}</p>
+      <input value={input} onChange={e => handleInput(e.target.value)} />
+    </>
+  )
 }
