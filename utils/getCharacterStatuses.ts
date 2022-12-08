@@ -5,7 +5,6 @@ const getCharacterStyles = (
   textBlock: string,
   inputBlock: string
 ) => {
-  console.log("in")
   const textByWord = splitByWord(textBlock)
   const inputByWord = splitByWord(inputBlock)
 
