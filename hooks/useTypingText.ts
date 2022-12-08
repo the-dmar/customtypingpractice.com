@@ -7,14 +7,24 @@ export default function useTypingText() {
   const [input, setInput] = useState<string>("")
 
   useEffect(() => {
-    newText()
+    setText(getRandomText)
   }, [])
 
-  const newText = () => setText(getRandomArrayItem(sentences))
+  useEffect(() => {
+    if (input.length === text.length) newBlock()
+  }, [input])
+
+  const getRandomText = () => getRandomArrayItem(sentences)
+
+  const newBlock = () => {
+    setText(getRandomText)
+    setInput("")
+  }
 
   const handleInput = (value: string) => {
     const lastTyped = value[value.length - 1]
     const correctCharacter = text[value.length - 1]
+
     if (lastTyped === " " && correctCharacter !== " ") {
       setInput(value.slice(0, -1) + "¿")
       return
@@ -25,5 +35,5 @@ export default function useTypingText() {
     } else setInput(value)
   }
 
-  return [text, newText, input, handleInput] as const
+  return [text, input, handleInput] as const
 }

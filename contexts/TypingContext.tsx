@@ -7,7 +7,6 @@ interface Children {
 
 interface TextContextInterface {
   text: string
-  newText: () => void
   input: string
   handleInput: (value: string) => void
 }
@@ -15,13 +14,12 @@ interface TextContextInterface {
 export const TypingContext = createContext<TextContextInterface | null>(null)
 
 const TypingContextProvider = ({ children }: Children) => {
-  const [text, newText, input, handleInput] = useTypingText()
+  const [text, input, handleInput] = useTypingText()
 
   return (
     <TypingContext.Provider
       value={{
         text,
-        newText,
         input,
         handleInput,
       }}
