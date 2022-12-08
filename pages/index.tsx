@@ -7,6 +7,7 @@ export default function Home() {
 
   return (
     <>
+      <input onChange={e => handleInput(e.target.value)} />
       <Text />
     </>
   )
