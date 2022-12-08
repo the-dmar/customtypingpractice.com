@@ -11,6 +11,7 @@ export default function useTypingText() {
   }, [])
 
   const newText = () => setText(getRandomArrayItem(sentences))
+
   const handleInput = (value: string) => {
     const lastTyped = value[value.length - 1]
     const correctCharacter = text[value.length - 1]
