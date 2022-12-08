@@ -1,3 +1,4 @@
+import Text from "../components/Text"
 import useTypingContext from "../hooks/useTypingContext"
 import useGuidedText from "../hooks/useTypingText"
 
@@ -6,9 +7,7 @@ export default function Home() {
 
   return (
     <>
-      <button onClick={newText}>Get New</button>
-      <p>{text}</p>
-      <input value={input} onChange={e => handleInput(e.target.value)} />
+      <Text />
     </>
   )
 }
