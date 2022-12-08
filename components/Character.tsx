@@ -7,5 +7,5 @@ export default function Character({
   character,
   characterIndex,
 }: CharacterProps) {
-  return <div>{character}</div>
+  return <div>{character === " " ? "\u00A0" : character}</div>
 }
