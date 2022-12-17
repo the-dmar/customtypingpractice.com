@@ -31,7 +31,7 @@ const useTimer = (startingTime: number, direction: TimerDirection) => {
     return () => clearInterval(timerIdRef.current!)
   }, [])
 
-  return [timer, start, pause, reset] as const
+  return [timer, start, pause, reset, setTimer] as const
 }
 
 export default useTimer

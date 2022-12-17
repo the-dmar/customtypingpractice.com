@@ -1,4 +1,4 @@
-import { createContext } from "react"
+import { createContext, SetStateAction, useState } from "react"
 import useTimer from "../hooks/useTimer"
 import useTypingText from "../hooks/useTypingText"
 
@@ -11,13 +11,21 @@ interface TextContextInterface {
   input: string
   handleInput: (value: string) => void
   timer: number
+  testDuration: number
+  handleTestDuration: (newDuration: number) => void
 }
 
 export const TypingContext = createContext<TextContextInterface | null>(null)
 
 const TypingContextProvider = ({ children }: Children) => {
   const [text, input, handleInput] = useTypingText()
-  const [timer, start, pause, reset] = useTimer(30, "backward")
+  const [testDuration, setTestDuration] = useState(60)
+  const [timer, start, pause, reset, setTimer] = useTimer(60, "backward")
+
+  const handleTestDuration = (newDuration: number) => {
+    setTimer(newDuration)
+    setTestDuration(newDuration)
+  }
 
   return (
     <TypingContext.Provider
@@ -26,6 +34,8 @@ const TypingContextProvider = ({ children }: Children) => {
         input,
         handleInput,
         timer,
+        testDuration,
+        handleTestDuration,
       }}
     >
       {children}
