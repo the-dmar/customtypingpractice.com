@@ -21,7 +21,7 @@ export default function useTypingText() {
     setInput("")
   }
 
-  const handleInput = (value: string) => {
+  const validateAndCorrectInput = (value: string) => {
     const lastTyped = value[value.length - 1]
     const correctCharacter = text[value.length - 1]
 
@@ -35,5 +35,5 @@ export default function useTypingText() {
     } else setInput(value)
   }
 
-  return [text, input, handleInput] as const
+  return [text, input, validateAndCorrectInput] as const
 }
