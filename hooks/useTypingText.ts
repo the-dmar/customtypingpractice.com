@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react"
 import sentences from "../text/sentences"
+import getCurrentWord from "../utils/getCurrentWord"
 import getRandomArrayItem from "../utils/getRandomArrayItem"
 
 export default function useTypingText() {
   const [text, setText] = useState<string>("")
   const [input, setInput] = useState<string>("")
   const [incorrectCharacters, setIncorrectCharacters] = useState<string[]>([])
+  const [incorrectWords, setIncorrectWords] = useState<string[]>([])
 
   useEffect(() => {
     setText(getRandomText)
@@ -14,6 +16,10 @@ export default function useTypingText() {
   useEffect(() => {
     if (input.length === text.length) newBlock()
   }, [input])
+
+  useEffect(() => {
+    console.log(incorrectWords)
+  }, [incorrectWords])
 
   const getRandomText = () => getRandomArrayItem(sentences)
 
@@ -29,6 +35,11 @@ export default function useTypingText() {
     if (lastTyped !== correctCharacter) {
       setIncorrectCharacters(incorrectCharacters => [
         ...new Set([...incorrectCharacters, correctCharacter.toUpperCase()]),
+      ])
+
+      const currentWord = getCurrentWord(text, input)
+      setIncorrectWords(incorrectWords => [
+        ...new Set([...incorrectWords, currentWord]),
       ])
     }
 
