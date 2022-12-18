@@ -1,4 +1,4 @@
-import { createContext, useRef, useState } from "react"
+import { createContext, useRef, useState, useEffect } from "react"
 import useTimer from "../hooks/useTimer"
 import useTypingText from "../hooks/useTypingText"
 
@@ -19,8 +19,25 @@ export const TypingContext = createContext<TextContextInterface | null>(null)
 
 const TypingContextProvider = ({ children }: Children) => {
   const [text, input, setInput] = useTypingText()
+  const [inputHistory, setInputHistory] = useState<string[]>([])
+  const [textHistory, setTextHistory] = useState<string[]>([])
   const [testDuration, setTestDuration] = useState(60)
   const [timer, start, pause, reset, setTimer] = useTimer(60, "backward")
+
+  useEffect(() => {
+    if (text) {
+      setTextHistory([...textHistory, text])
+      setInputHistory([...inputHistory, ""])
+    }
+  }, [text])
+
+  useEffect(() => {
+    if (input !== "") updateInputHistory()
+  }, [input])
+
+  useEffect(() => {
+    console.log(inputHistory)
+  }, [inputHistory])
 
   const timerStatusRef = useRef("inactive")
 
@@ -38,6 +55,12 @@ const TypingContextProvider = ({ children }: Children) => {
       timerStatusRef.current = "active"
     }
     setInput(newInput)
+  }
+
+  const updateInputHistory = () => {
+    let newInputHistory = [...inputHistory]
+    newInputHistory[inputHistory.length - 1] = input
+    setInputHistory(newInputHistory)
   }
 
   return (
