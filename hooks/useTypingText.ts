@@ -5,6 +5,7 @@ import getRandomArrayItem from "../utils/getRandomArrayItem"
 export default function useTypingText() {
   const [text, setText] = useState<string>("")
   const [input, setInput] = useState<string>("")
+  const [incorrectCharacters, setIncorrectCharacters] = useState<string[]>([])
 
   useEffect(() => {
     setText(getRandomText)
@@ -25,6 +26,12 @@ export default function useTypingText() {
     const lastTyped = value[value.length - 1]
     const correctCharacter = text[value.length - 1]
 
+    if (lastTyped !== correctCharacter) {
+      setIncorrectCharacters(incorrectCharacters => [
+        ...new Set([...incorrectCharacters, correctCharacter.toUpperCase()]),
+      ])
+    }
+
     if (lastTyped === " " && correctCharacter !== " ") {
       setInput(value.slice(0, -1) + "¿")
       return
@@ -35,5 +42,5 @@ export default function useTypingText() {
     } else setInput(value)
   }
 
-  return [text, input, validateAndCorrectInput] as const
+  return [text, input, validateAndCorrectInput, incorrectCharacters] as const
 }

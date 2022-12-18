@@ -18,7 +18,7 @@ interface TextContextInterface {
 export const TypingContext = createContext<TextContextInterface | null>(null)
 
 const TypingContextProvider = ({ children }: Children) => {
-  const [text, input, setInput] = useTypingText()
+  const [text, input, setInput, incorrectCharacters] = useTypingText()
   const [inputHistory, setInputHistory] = useState<string[]>([])
   const [textHistory, setTextHistory] = useState<string[]>([])
   const [testDuration, setTestDuration] = useState(60)
@@ -32,12 +32,12 @@ const TypingContextProvider = ({ children }: Children) => {
   }, [text])
 
   useEffect(() => {
-    if (input !== "") updateInputHistory()
-  }, [input])
+    console.log(incorrectCharacters)
+  }, [incorrectCharacters])
 
   useEffect(() => {
-    console.log(inputHistory)
-  }, [inputHistory])
+    if (input !== "") updateInputHistory()
+  }, [input])
 
   const timerStatusRef = useRef("inactive")
 
