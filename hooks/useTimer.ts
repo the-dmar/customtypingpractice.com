@@ -12,7 +12,12 @@ const useTimer = (startingTime: number, direction: TimerDirection) => {
       () =>
         setTimer(timer => {
           if (direction === "forward") return timer + 1
-          else return timer - 1
+          else {
+            if (timer === 1) {
+              timerIdRef.current && clearInterval(timerIdRef.current)
+              return 0
+            } else return timer - 1
+          }
         }),
       1000
     )
