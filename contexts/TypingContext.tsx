@@ -13,6 +13,7 @@ interface TextContextInterface {
   timer: number
   testDuration: number
   handleTestDuration: (newDuration: number) => void
+  wpm: number
 }
 
 export const TypingContext = createContext<TextContextInterface | null>(null)
@@ -23,23 +24,28 @@ const TypingContextProvider = ({ children }: Children) => {
   const [textHistory, setTextHistory] = useState<string[]>([])
   const [testDuration, setTestDuration] = useState(60)
   const [timer, start, pause, reset, setTimer] = useTimer(60, "backward")
+  const [wpm, setWpm] = useState(0)
 
   useEffect(() => {
     if (text) {
-      setTextHistory([...textHistory, text])
-      setInputHistory([...inputHistory, ""])
+      addNewHistoryBlocks()
     }
   }, [text])
-
-  useEffect(() => {
-    console.log(incorrectCharacters)
-  }, [incorrectCharacters])
 
   useEffect(() => {
     if (input !== "") updateInputHistory()
   }, [input])
 
+  useEffect(() => {
+    if (timer === 0) calculateWpm()
+  }, [timer])
+
   const timerStatusRef = useRef("inactive")
+
+  const addNewHistoryBlocks = () => {
+    setTextHistory([...textHistory, text])
+    setInputHistory([...inputHistory, ""])
+  }
 
   const handleTestDuration = (newDuration: number) => {
     setTimer(newDuration)
@@ -63,6 +69,22 @@ const TypingContextProvider = ({ children }: Children) => {
     setInputHistory(newInputHistory)
   }
 
+  const calculateWpm = () => {
+    const combinedTextHistory = textHistory.join("")
+    const combinedInputHistory = inputHistory.join("")
+
+    const correctCharacterCount = combinedInputHistory
+      .split("")
+      .reduce((acc, el, i) => {
+        if (combinedTextHistory[i] === el) return (acc += 1)
+        else return acc
+      }, 0)
+    const correctWordCount = correctCharacterCount / 5
+    const timerInMinutes = testDuration / 60
+    const newWpm = Math.ceil(correctWordCount / timerInMinutes)
+    setWpm(newWpm)
+  }
+
   return (
     <TypingContext.Provider
       value={{
@@ -72,6 +94,7 @@ const TypingContextProvider = ({ children }: Children) => {
         timer,
         testDuration,
         handleTestDuration,
+        wpm,
       }}
     >
       {children}

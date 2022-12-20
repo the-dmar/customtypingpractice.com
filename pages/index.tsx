@@ -4,7 +4,7 @@ import Timer from "../components/Timer"
 import useTypingContext from "../hooks/useTypingContext"
 
 export default function Home() {
-  const { input, handleInput } = useTypingContext()
+  const { input, handleInput, wpm } = useTypingContext()
 
   return (
     <>
@@ -12,6 +12,7 @@ export default function Home() {
       <input value={input} onChange={e => handleInput(e.target.value)} />
       <Text />
       <Timer />
+      <div>{wpm}</div>
     </>
   )
 }

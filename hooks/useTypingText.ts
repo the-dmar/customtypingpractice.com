@@ -17,10 +17,6 @@ export default function useTypingText() {
     if (input.length === text.length) newBlock()
   }, [input])
 
-  useEffect(() => {
-    console.log(incorrectWords)
-  }, [incorrectWords])
-
   const getRandomText = () => getRandomArrayItem(sentences)
 
   const newBlock = () => {
@@ -53,5 +49,11 @@ export default function useTypingText() {
     } else setInput(value)
   }
 
-  return [text, input, validateAndCorrectInput, incorrectCharacters] as const
+  return [
+    text,
+    input,
+    validateAndCorrectInput,
+    incorrectCharacters,
+    incorrectWords,
+  ] as const
 }
