@@ -30,13 +30,12 @@ export default function useTypingText() {
 
     if (lastTyped !== correctCharacter) {
       setIncorrectCharacters(incorrectCharacters => [
-        ...new Set([...incorrectCharacters, correctCharacter.toUpperCase()]),
+        ...incorrectCharacters,
+        correctCharacter.toUpperCase(),
       ])
 
       const currentWord = getCurrentWord(text, input)
-      setIncorrectWords(incorrectWords => [
-        ...new Set([...incorrectWords, currentWord]),
-      ])
+      setIncorrectWords(incorrectWords => [...incorrectWords, currentWord])
     }
 
     if (lastTyped === " " && correctCharacter !== " ") {

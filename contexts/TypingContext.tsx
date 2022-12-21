@@ -14,17 +14,20 @@ interface TextContextInterface {
   testDuration: number
   handleTestDuration: (newDuration: number) => void
   wpm: number
+  accuracy: string
 }
 
 export const TypingContext = createContext<TextContextInterface | null>(null)
 
 const TypingContextProvider = ({ children }: Children) => {
   const [text, input, setInput, incorrectCharacters] = useTypingText()
+  const [keystrokes, setKeystrokes] = useState(0)
   const [inputHistory, setInputHistory] = useState<string[]>([])
   const [textHistory, setTextHistory] = useState<string[]>([])
   const [testDuration, setTestDuration] = useState(60)
   const [timer, start, pause, reset, setTimer] = useTimer(60, "backward")
   const [wpm, setWpm] = useState(0)
+  const [accuracy, setAccuracy] = useState("")
 
   useEffect(() => {
     if (text) {
@@ -33,11 +36,17 @@ const TypingContextProvider = ({ children }: Children) => {
   }, [text])
 
   useEffect(() => {
-    if (input !== "") updateInputHistory()
+    if (input !== "") {
+      updateInputHistory()
+      setKeystrokes(keystrokes => (keystrokes += 1))
+    }
   }, [input])
 
   useEffect(() => {
-    if (timer === 0) calculateWpm()
+    if (timer === 0) {
+      calculateWpm()
+      calculateAccuracy()
+    }
   }, [timer])
 
   const timerStatusRef = useRef("inactive")
@@ -69,20 +78,30 @@ const TypingContextProvider = ({ children }: Children) => {
     setInputHistory(newInputHistory)
   }
 
-  const calculateWpm = () => {
-    const combinedTextHistory = textHistory.join("")
-    const combinedInputHistory = inputHistory.join("")
-
-    const correctCharacterCount = combinedInputHistory
+  const getCorrectCharacterCount = () => {
+    return inputHistory
+      .join("")
       .split("")
       .reduce((acc, el, i) => {
-        if (combinedTextHistory[i] === el) return (acc += 1)
+        if (textHistory.join("")[i] === el) return (acc += 1)
         else return acc
       }, 0)
+  }
+
+  const calculateWpm = () => {
+    const correctCharacterCount = getCorrectCharacterCount()
     const correctWordCount = correctCharacterCount / 5
     const timerInMinutes = testDuration / 60
     const newWpm = Math.ceil(correctWordCount / timerInMinutes)
     setWpm(newWpm)
+  }
+
+  const calculateAccuracy = () => {
+    const newAccuracy = `${Math.ceil(
+      100 - (incorrectCharacters.length / keystrokes) * 100
+    )}%`
+
+    setAccuracy(newAccuracy)
   }
 
   return (
@@ -95,6 +114,7 @@ const TypingContextProvider = ({ children }: Children) => {
         testDuration,
         handleTestDuration,
         wpm,
+        accuracy,
       }}
     >
       {children}
