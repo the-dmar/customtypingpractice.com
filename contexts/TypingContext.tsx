@@ -2,7 +2,7 @@ import { createContext, useRef, useState, useEffect } from "react"
 import useTimer from "../hooks/useTimer"
 import useTypingText from "../hooks/useTypingText"
 
-interface Children {
+export interface Children {
   children: JSX.Element | JSX.Element[]
 }
 
