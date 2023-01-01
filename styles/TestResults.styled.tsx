@@ -24,17 +24,21 @@ export const OuterRow = styled.section`
 `
 
 export const Title = styled.h1`
-  font-size: 2.7vw;
+  font-size: 3.2vw;
   font-weight: 800;
+  color: var(--Blue);
 `
 export const MiddleRow = styled.section`
   display: flex;
   flex-direction: row;
-  padding: 0.5rem 0;
+  padding: 3rem 0;
+  box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+  border-radius: 4px;
 `
 
 export const RestartInstructionsPrimary = styled.strong`
   font-size: 1.8vw;
+  color: var(--Blue);
 `
 export const RestartInstructionsSecondary = styled.span`
   font-weight: 600;
@@ -59,15 +63,17 @@ export const ResultWrapper = styled.div<ResultWrapperProps>`
   justify-content: ${({ alignment }) => alignment};
   /* outline: 1px solid blue; */
   height: 100%;
-  max-height: 20rem;
+  max-height: 16rem;
 `
 
 export const ResultLabel = styled.label`
   font-weight: 700;
-  font-size: 1.1vw;
+  font-size: 1vw;
+  color: var(--Orange);
+  margin-bottom: 0.5rem;
 `
 export const MainResult = styled.output`
-  font-size: 2.7vw;
+  font-size: 2.9vw;
   font-weight: 700;
 `
 export const ResultList = styled.ul`
