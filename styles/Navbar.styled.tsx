@@ -13,7 +13,7 @@ export const NavLinkWrapper = styled.ul`
 export const NavLink = styled.li`
   list-style: none;
   margin-left: 4rem;
-  font-size: 1.1rem;
+  font-size: 1.05vw;
   color: #575f66;
   font-weight: 600;
 `

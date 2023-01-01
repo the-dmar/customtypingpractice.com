@@ -16,7 +16,7 @@ export const OuterRow = styled.section`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 2rem 0;
+  margin: 1rem 0;
 
   &:nth-child(3) > *:not(:first-child) {
     padding-top: 0.5rem;
@@ -32,7 +32,6 @@ export const MiddleRow = styled.section`
   display: flex;
   flex-direction: row;
   padding: 3rem 0;
-  box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
   border-radius: 4px;
 `
 
@@ -43,6 +42,7 @@ export const RestartInstructionsPrimary = styled.strong`
 export const RestartInstructionsSecondary = styled.span`
   font-weight: 600;
   font-size: 1.2vw;
+  margin-right: 0.4rem;
 `
 export const RestartInstructionsSecondaryWrapper = styled.div`
   display: flex;
@@ -53,6 +53,10 @@ export const ResultColumn = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
+  box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+  margin: 0 2rem;
+  border-radius: 4px;
+  padding: 1rem 0;
   /* outline: 1px solid green; */
 `
 

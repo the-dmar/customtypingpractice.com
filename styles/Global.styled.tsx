@@ -8,11 +8,6 @@ const GlobalStyles = createGlobalStyle`
         color: #333;
         font-family: 'Nunito Sans', sans-serif;
     }
-    
-    html, body, #__next {
-        height: 100%;
-        width: 100%;
-    }
 
     :root {
         --Blue: #126782;

@@ -1,3 +1,4 @@
+import { Button } from "../styles/General.styled"
 import {
   TestResultContainer,
   ResultColumn,
@@ -54,11 +55,13 @@ export default function TestResults() {
       <OuterRow>
         <TestDurations />
         <RestartInstructionsPrimary>
-          Press ENTER or TAB to start over
+          Press TAB to start over
         </RestartInstructionsPrimary>
         <RestartInstructionsSecondaryWrapper>
           <RestartInstructionsSecondary>Or click</RestartInstructionsSecondary>
-          <button>Here</button>
+          <Button background="var(--Orange)" color="white">
+            Here
+          </Button>
         </RestartInstructionsSecondaryWrapper>
       </OuterRow>
     </TestResultContainer>
