@@ -4,7 +4,7 @@ export const NavbarContainer = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 2rem;
+  padding: 1rem 2rem;
 `
 
 export const NavLinkWrapper = styled.ul`

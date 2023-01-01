@@ -9,7 +9,7 @@ import logo from "../assets/logo.svg"
 export default function Navbar() {
   return (
     <NavbarContainer>
-      <Image src={logo} alt="logo" height={100} width={100} />
+      <Image src={logo} alt="logo" height={45} />
       <NavLinkWrapper>
         <NavLink>Home</NavLink>
         <NavLink>Feedback</NavLink>

@@ -1,5 +1,5 @@
 import styled from "styled-components"
 
 export const LayoutContainer = styled.div`
-  margin: 2rem;
+  margin: 0 2rem;
 `
