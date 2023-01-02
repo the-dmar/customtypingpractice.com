@@ -1,6 +1,7 @@
 import { createContext, useRef, useState, useEffect } from "react"
 import useTimer from "../hooks/useTimer"
 import useTypingText from "../hooks/useTypingText"
+import getCurrentWord from "../utils/getCurrentWord"
 
 export interface Children {
   children: JSX.Element | JSX.Element[]
@@ -17,15 +18,21 @@ interface TextContextInterface {
   accuracy: string
 }
 
+interface Keystroke {
+  key: string
+  correctKey: string
+  word: string
+}
+
 export const TypingContext = createContext<TextContextInterface | null>(null)
 
 const TypingContextProvider = ({ children }: Children) => {
   const [text, input, setInput, incorrectCharacters] = useTypingText()
-  const [keystrokes, setKeystrokes] = useState(0)
+  const [keystrokes, setKeystrokes] = useState<Keystroke[]>([])
   const [inputHistory, setInputHistory] = useState<string[]>([])
   const [textHistory, setTextHistory] = useState<string[]>([])
-  const [testDuration, setTestDuration] = useState(60)
-  const [timer, start, pause, reset, setTimer] = useTimer(60, "backward")
+  const [testDuration, setTestDuration] = useState(15)
+  const [timer, start, pause, reset, setTimer] = useTimer(15, "backward")
   const [wpm, setWpm] = useState(0)
   const [accuracy, setAccuracy] = useState("")
 
@@ -38,7 +45,6 @@ const TypingContextProvider = ({ children }: Children) => {
   useEffect(() => {
     if (input !== "") {
       updateInputHistory()
-      setKeystrokes(keystrokes => (keystrokes += 1))
     }
   }, [input])
 
@@ -48,6 +54,10 @@ const TypingContextProvider = ({ children }: Children) => {
       calculateAccuracy()
     }
   }, [timer])
+
+  useEffect(() => {
+    console.log(keystrokes)
+  }, [keystrokes])
 
   const timerStatusRef = useRef("inactive")
 
@@ -65,11 +75,24 @@ const TypingContextProvider = ({ children }: Children) => {
   }
 
   const handleInput = (newInput: string) => {
+    if (newInput.length > input.length) {
+      handleKeystroke(newInput)
+    }
+
     if (timerStatusRef.current === "inactive") {
       start()
       timerStatusRef.current = "active"
     }
     setInput(newInput)
+  }
+
+  const handleKeystroke = (newInput: string) => {
+    const keyIndex = newInput.length - 1
+    const key = newInput[keyIndex]
+    setKeystrokes(keystrokes => [
+      ...keystrokes,
+      { key, correctKey: text[keyIndex], word: getCurrentWord(text, newInput) },
+    ])
   }
 
   const updateInputHistory = () => {
@@ -98,7 +121,7 @@ const TypingContextProvider = ({ children }: Children) => {
 
   const calculateAccuracy = () => {
     const newAccuracy = `${Math.ceil(
-      100 - (incorrectCharacters.length / keystrokes) * 100
+      100 - (incorrectCharacters.length / keystrokes.length) * 100
     )}%`
 
     setAccuracy(newAccuracy)

@@ -7,16 +7,16 @@ import useTypingContext from "../hooks/useTypingContext"
 export default function Home() {
   const { input, handleInput, wpm, accuracy } = useTypingContext()
 
-  // return (
-  //   <>
-  //     <TestDurations />
-  //     <input value={input} onChange={e => handleInput(e.target.value)} />
-  //     <Text />
-  //     <Timer />
-  //     <div>{wpm}</div>
-  //     <div>{accuracy}</div>
-  //   </>
-  // )
+  return (
+    <>
+      <TestDurations />
+      <input value={input} onChange={e => handleInput(e.target.value)} />
+      <Text />
+      <Timer />
+      <div>{wpm}</div>
+      <div>{accuracy}</div>
+    </>
+  )
 
-  return <TestResults />
+  // return <TestResults />
 }
