@@ -6,6 +6,7 @@ interface TestDurationProps {
 
 export const DurationButtonContainer = styled.div`
   display: flex;
+  padding-bottom: 2rem;
 `
 
 export const DurationButtonWrapper = styled.div`

@@ -9,6 +9,7 @@ export const TestResultContainer = styled.main`
   flex-direction: column;
   /* outline: 1px solid red; */
   padding: 0 2rem;
+  width: 100%;
 `
 
 export const OuterRow = styled.section`
@@ -88,6 +89,7 @@ export const ResultList = styled.ul`
 export const ResultListItem = styled.li`
   list-style: none;
   margin-top: 1rem;
+  text-align: center;
 `
 
 export const HorizontalLine = styled.div``
