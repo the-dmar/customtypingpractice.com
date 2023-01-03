@@ -10,17 +10,17 @@ export default function useTypingText() {
   const [incorrectWords, setIncorrectWords] = useState<string[]>([])
 
   useEffect(() => {
-    setText(getRandomText)
+    getRandomText()
   }, [])
 
   useEffect(() => {
     if (input.length === text.length) newBlock()
   }, [input])
 
-  const getRandomText = () => getRandomArrayItem(sentences)
+  const getRandomText = () => setText(getRandomArrayItem(sentences))
 
   const newBlock = () => {
-    setText(getRandomText)
+    getRandomText()
     setInput("")
   }
 
@@ -54,5 +54,6 @@ export default function useTypingText() {
     validateAndCorrectInput,
     incorrectCharacters,
     incorrectWords,
+    getRandomText,
   ] as const
 }

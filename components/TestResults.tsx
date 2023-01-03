@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import useTypingContext from "../hooks/useTypingContext"
 import { Button } from "../styles/General.styled"
 import {
@@ -20,7 +21,14 @@ import {
 import TestDurations from "./TestDurations"
 
 export default function TestResults() {
-  const { wpm, accuracy, keystrokes } = useTypingContext()
+  const { wpm, accuracy, keystrokes, newTest } = useTypingContext()
+
+  useEffect(() => {
+    document.addEventListener(
+      "keydown",
+      ({ key }) => key === "Tab" && newTest()
+    )
+  }, [])
 
   const incorrectKeystrokes = () => {
     return keystrokes.filter(({ key, correctKey }) => key !== correctKey)
@@ -78,7 +86,7 @@ export default function TestResults() {
         </RestartInstructionsPrimary>
         <RestartInstructionsSecondaryWrapper>
           <RestartInstructionsSecondary>Or click</RestartInstructionsSecondary>
-          <Button background="var(--Orange)" color="white">
+          <Button onClick={newTest} background="var(--Orange)" color="white">
             Here
           </Button>
         </RestartInstructionsSecondaryWrapper>

@@ -17,6 +17,7 @@ interface TextContextInterface {
   wpm: number
   accuracy: string
   keystrokes: Keystroke[]
+  newTest: () => void
 }
 
 interface Keystroke {
@@ -28,7 +29,8 @@ interface Keystroke {
 export const TypingContext = createContext<TextContextInterface | null>(null)
 
 const TypingContextProvider = ({ children }: Children) => {
-  const [text, input, setInput, incorrectCharacters] = useTypingText()
+  const [text, input, setInput, , incorrectCharacters, getRandomText] =
+    useTypingText()
   const [keystrokes, setKeystrokes] = useState<Keystroke[]>([])
   const [inputHistory, setInputHistory] = useState<string[]>([])
   const [textHistory, setTextHistory] = useState<string[]>([])
@@ -51,6 +53,7 @@ const TypingContextProvider = ({ children }: Children) => {
 
   useEffect(() => {
     if (timer === 0) {
+      console.log({ inputHistory, textHistory })
       calculateWpm()
       calculateAccuracy()
     }
@@ -61,6 +64,13 @@ const TypingContextProvider = ({ children }: Children) => {
   }, [keystrokes])
 
   const timerStatusRef = useRef("inactive")
+
+  const newTest = () => {
+    getRandomText()
+    handleTestDuration(testDuration)
+    setInputHistory([])
+    setTextHistory([])
+  }
 
   const addNewHistoryBlocks = () => {
     setTextHistory([...textHistory, text])
@@ -140,6 +150,7 @@ const TypingContextProvider = ({ children }: Children) => {
         wpm,
         accuracy,
         keystrokes,
+        newTest,
       }}
     >
       {children}
