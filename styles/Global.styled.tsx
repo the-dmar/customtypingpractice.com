@@ -14,6 +14,15 @@ const GlobalStyles = createGlobalStyle`
         --Black: #333;
         --Orange: #FF6D00;
     }
-    
+
+    html, body, #__next{
+        height: 100%;
+    }
+
+    #__next {
+        display: flex;
+        flex-direction: column;
+    }
+
 `
 export default GlobalStyles

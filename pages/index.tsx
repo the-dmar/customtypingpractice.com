@@ -13,8 +13,6 @@ export default function Home() {
       <TestDurations />
       <GuidedText />
       <Timer />
-      <div>{wpm}</div>
-      <div>{accuracy}</div>
     </>
   ) : (
     <TestResults />
