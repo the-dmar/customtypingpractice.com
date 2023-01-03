@@ -1,3 +1,4 @@
+import GuidedText from "../components/GuidedText"
 import TestDurations from "../components/TestDurations"
 import TestResults from "../components/TestResults"
 import Text from "../components/Text"
@@ -10,8 +11,7 @@ export default function Home() {
   return timer ? (
     <>
       <TestDurations />
-      <input value={input} onChange={e => handleInput(e.target.value)} />
-      <Text />
+      <GuidedText />
       <Timer />
       <div>{wpm}</div>
       <div>{accuracy}</div>

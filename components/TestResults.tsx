@@ -24,10 +24,12 @@ export default function TestResults() {
   const { wpm, accuracy, keystrokes, newTest } = useTypingContext()
 
   useEffect(() => {
-    document.addEventListener(
-      "keydown",
-      ({ key }) => key === "Tab" && newTest()
-    )
+    document.addEventListener("keydown", ({ key }) => {
+      if (key === "Enter") {
+        newTest()
+        return
+      }
+    })
   }, [])
 
   const incorrectKeystrokes = () => {
@@ -82,7 +84,7 @@ export default function TestResults() {
       <OuterRow>
         <TestDurations />
         <RestartInstructionsPrimary>
-          Press TAB to start over
+          Press ENTER to start over
         </RestartInstructionsPrimary>
         <RestartInstructionsSecondaryWrapper>
           <RestartInstructionsSecondary>Or click</RestartInstructionsSecondary>
