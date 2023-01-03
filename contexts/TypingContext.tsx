@@ -16,6 +16,7 @@ interface TextContextInterface {
   handleTestDuration: (newDuration: number) => void
   wpm: number
   accuracy: string
+  keystrokes: Keystroke[]
 }
 
 interface Keystroke {
@@ -138,6 +139,7 @@ const TypingContextProvider = ({ children }: Children) => {
         handleTestDuration,
         wpm,
         accuracy,
+        keystrokes,
       }}
     >
       {children}

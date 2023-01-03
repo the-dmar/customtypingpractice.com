@@ -5,9 +5,9 @@ import Timer from "../components/Timer"
 import useTypingContext from "../hooks/useTypingContext"
 
 export default function Home() {
-  const { input, handleInput, wpm, accuracy } = useTypingContext()
+  const { input, handleInput, wpm, accuracy, timer } = useTypingContext()
 
-  return (
+  return timer ? (
     <>
       <TestDurations />
       <input value={input} onChange={e => handleInput(e.target.value)} />
@@ -16,6 +16,8 @@ export default function Home() {
       <div>{wpm}</div>
       <div>{accuracy}</div>
     </>
+  ) : (
+    <TestResults />
   )
 
   // return <TestResults />

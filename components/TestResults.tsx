@@ -1,3 +1,4 @@
+import useTypingContext from "../hooks/useTypingContext"
 import { Button } from "../styles/General.styled"
 import {
   TestResultContainer,
@@ -19,6 +20,20 @@ import {
 import TestDurations from "./TestDurations"
 
 export default function TestResults() {
+  const { wpm, accuracy, keystrokes } = useTypingContext()
+
+  const incorrectKeystrokes = () => {
+    return keystrokes.filter(({ key, correctKey }) => key !== correctKey)
+  }
+
+  const incorrectWords = () => [
+    ...new Set(incorrectKeystrokes().map(({ word }) => word)),
+  ]
+
+  const incorrectCharacters = () => incorrectKeystrokes().map(({ key }) => key)
+
+  // const incorrectCharacters
+
   return (
     <TestResultContainer>
       <OuterRow>
@@ -28,18 +43,20 @@ export default function TestResults() {
         <ResultColumn>
           <ResultWrapper alignment="center">
             <ResultLabel>Speed (WPM)</ResultLabel>
-            <MainResult>132</MainResult>
+            <MainResult>{wpm}</MainResult>
           </ResultWrapper>
           <ResultWrapper alignment="center">
             <ResultLabel>Accuracy</ResultLabel>
-            <MainResult>98%</MainResult>
+            <MainResult>{accuracy}</MainResult>
           </ResultWrapper>
         </ResultColumn>
         <ResultColumn>
           <ResultWrapper alignment="start">
             <ResultLabel>Incorrect Words</ResultLabel>
             <ResultList>
-              {Array(16).fill(<ResultListItem>Word</ResultListItem>)}
+              {incorrectWords().map(word => (
+                <ResultListItem>{word}</ResultListItem>
+              ))}
             </ResultList>
           </ResultWrapper>
         </ResultColumn>
@@ -47,7 +64,9 @@ export default function TestResults() {
           <ResultWrapper alignment="start">
             <ResultLabel>Incorrect Letters</ResultLabel>
             <ResultList>
-              {Array(16).fill(<ResultListItem>A</ResultListItem>)}
+              {incorrectCharacters().map(character => (
+                <ResultListItem>{character}</ResultListItem>
+              ))}
             </ResultList>
           </ResultWrapper>
         </ResultColumn>
