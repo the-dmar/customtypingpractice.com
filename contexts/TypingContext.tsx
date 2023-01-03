@@ -59,10 +59,6 @@ const TypingContextProvider = ({ children }: Children) => {
     }
   }, [timer])
 
-  useEffect(() => {
-    console.log(keystrokes)
-  }, [keystrokes])
-
   const timerStatusRef = useRef("inactive")
 
   const newTest = () => {
@@ -70,6 +66,7 @@ const TypingContextProvider = ({ children }: Children) => {
     handleTestDuration(testDuration)
     setInputHistory([])
     setTextHistory([])
+    setKeystrokes([])
   }
 
   const addNewHistoryBlocks = () => {
