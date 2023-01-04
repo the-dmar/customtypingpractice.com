@@ -83,5 +83,6 @@ export default function useTypingText() {
     incorrectCharacters,
     incorrectWords,
     getRandomText,
+    savedCharacterStats,
   ] as const
 }

@@ -1,6 +1,7 @@
 import { createContext, useRef, useState, useEffect } from "react"
 import useTimer from "../hooks/useTimer"
 import useTypingText from "../hooks/useTypingText"
+import calculateAccuracy from "../utils/calculateAccuracy"
 import getCurrentWord from "../utils/getCurrentWord"
 
 export interface Children {
@@ -18,6 +19,11 @@ interface TextContextInterface {
   accuracy: string
   keystrokes: Keystroke[]
   newTest: () => void
+  savedCharacterStats: {
+    character: string
+    correct: number
+    incorrect: number
+  }[]
 }
 
 interface Keystroke {
@@ -29,8 +35,15 @@ interface Keystroke {
 export const TypingContext = createContext<TextContextInterface | null>(null)
 
 const TypingContextProvider = ({ children }: Children) => {
-  const [text, input, setInput, , incorrectCharacters, getRandomText] =
-    useTypingText()
+  const [
+    text,
+    input,
+    setInput,
+    ,
+    incorrectCharacters,
+    getRandomText,
+    savedCharacterStats,
+  ] = useTypingText()
   const [keystrokes, setKeystrokes] = useState<Keystroke[]>([])
   const [inputHistory, setInputHistory] = useState<string[]>([])
   const [textHistory, setTextHistory] = useState<string[]>([])
@@ -53,9 +66,17 @@ const TypingContextProvider = ({ children }: Children) => {
 
   useEffect(() => {
     if (timer === 0) {
-      console.log({ inputHistory, textHistory })
       calculateWpm()
-      calculateAccuracy()
+
+      const incorrectKeystrokes = keystrokes.reduce(
+        (acc, { key, correctKey }) => {
+          return key === correctKey ? acc : (acc += 1)
+        },
+        0
+      )
+
+      const totalKeystrokes = keystrokes.length
+      setAccuracy(calculateAccuracy(incorrectKeystrokes, totalKeystrokes))
     }
   }, [timer])
 
@@ -127,14 +148,6 @@ const TypingContextProvider = ({ children }: Children) => {
     setWpm(newWpm)
   }
 
-  const calculateAccuracy = () => {
-    const newAccuracy = `${Math.ceil(
-      100 - (incorrectCharacters.length / keystrokes.length) * 100
-    )}%`
-
-    setAccuracy(newAccuracy)
-  }
-
   return (
     <TypingContext.Provider
       value={{
@@ -148,6 +161,7 @@ const TypingContextProvider = ({ children }: Children) => {
         accuracy,
         keystrokes,
         newTest,
+        savedCharacterStats,
       }}
     >
       {children}
