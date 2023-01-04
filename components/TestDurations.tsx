@@ -20,15 +20,12 @@ export default function TestDurations() {
   return (
     <DurationButtonContainer>
       {durations.map(({ label, seconds }, i) => (
-        <DurationButtonWrapper>
-          <DurationButton
-            onClick={() => handleTestDuration(seconds)}
-            selected={testDuration === seconds}
-          >
-            {label}
-          </DurationButton>
-          {i < durations.length && <Divider></Divider>}
-        </DurationButtonWrapper>
+        <DurationButton
+          onClick={() => handleTestDuration(seconds)}
+          selected={testDuration === seconds}
+        >
+          {label}
+        </DurationButton>
       ))}
     </DurationButtonContainer>
   )

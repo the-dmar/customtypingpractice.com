@@ -17,6 +17,7 @@ export default function Word({ word, wordIndex }: WordProps) {
     <WordBlock>
       {word.split("").map((character, characterIndex) => (
         <Character
+          wordIndex={wordIndex}
           character={character}
           characterIndex={characterIndex}
           status={characterStatuses[characterIndex]}
