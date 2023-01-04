@@ -76,5 +76,11 @@ export default function useTypingText() {
     []
   )
 
-  return [text, input, setInput, getRandomText, savedCharacterStats] as const
+  return [
+    text,
+    input,
+    validateAndCorrectInput,
+    getRandomText,
+    savedCharacterStats,
+  ] as const
 }
