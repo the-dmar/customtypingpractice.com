@@ -12,6 +12,7 @@ const GlobalStyles = createGlobalStyle`
     :root {
         --Blue: #126782;
         --Black: #333;
+        --Gray: #aeaeae;
         --Orange: #FF6D00;
     }
 

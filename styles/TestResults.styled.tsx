@@ -42,8 +42,8 @@ export const RestartInstructionsPrimary = styled.strong`
 `
 export const RestartInstructionsSecondary = styled.span`
   font-weight: 600;
-  font-size: 1.2vw;
-  margin-right: 0.4rem;
+  font-size: 1.3vw;
+  margin-right: 0.6rem;
 `
 export const RestartInstructionsSecondaryWrapper = styled.div`
   display: flex;
@@ -89,6 +89,8 @@ export const ResultList = styled.ul`
 export const ResultListItem = styled.li`
   list-style: none;
   margin-top: 1rem;
+  font-weight: 700;
+  font-size: 1.1rem;
   text-align: center;
 `
 

@@ -21,6 +21,9 @@ export const DurationButton = styled.button<TestDurationProps>`
   font-weight: ${({ selected }) => (selected ? "800" : "600")};
   font-size: 1.3vw;
   cursor: pointer;
+  &:hover {
+    transition: all 0.5s ease;
+  }
 `
 
 export const Divider = styled.div`

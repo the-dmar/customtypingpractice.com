@@ -21,9 +21,6 @@ export default function Navbar() {
           <Link href="/">Home</Link>
         </NavLink>
         <NavLink>
-          <Link href="/">Feedback</Link>
-        </NavLink>
-        <NavLink>
           <Link href="/stats">Stats</Link>
         </NavLink>
       </NavLinkWrapper>

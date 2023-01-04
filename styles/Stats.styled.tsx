@@ -24,7 +24,7 @@ export const Row = styled.div`
     &::after {
       content: "";
       position: absolute;
-      background: var(--Blue);
+      background: var(--Gray);
       height: 1.5px;
       width: 100%;
     }
@@ -41,7 +41,7 @@ export const Cell = styled.span`
   :first-child {
     font-weight: 800;
     color: var(--Orange);
-    font-size: 1.4rem;
+    font-size: 1.3rem;
   }
 
   /* width: 110%; */
