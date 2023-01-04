@@ -21,6 +21,7 @@ export default function TestDurations() {
         <DurationButton
           onClick={() => handleTestDuration(seconds)}
           selected={testDuration === seconds}
+          key={i}
         >
           {label}
         </DurationButton>

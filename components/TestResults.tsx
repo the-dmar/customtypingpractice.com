@@ -60,8 +60,8 @@ export default function TestResults() {
           <ResultWrapper alignment="start">
             <ResultLabel>Incorrect Words</ResultLabel>
             <ResultList>
-              {incorrectWords().map(word => (
-                <ResultListItem>{word}</ResultListItem>
+              {incorrectWords().map((word, i) => (
+                <ResultListItem key={i}>{word}</ResultListItem>
               ))}
             </ResultList>
           </ResultWrapper>
@@ -70,8 +70,8 @@ export default function TestResults() {
           <ResultWrapper alignment="start">
             <ResultLabel>Incorrect Letters</ResultLabel>
             <ResultList>
-              {incorrectCharacters().map(character => (
-                <ResultListItem>{character}</ResultListItem>
+              {incorrectCharacters().map((character, i) => (
+                <ResultListItem key={i}>{character}</ResultListItem>
               ))}
             </ResultList>
           </ResultWrapper>

@@ -31,9 +31,11 @@ export default function Stats() {
   return (
     <StatTable>
       {tableValues().map((row, rowIndex) => (
-        <Row>
-          {row.map(value => (
-            <Cell>{rowIndex === 0 ? <Header>{value}</Header> : value}</Cell>
+        <Row key={rowIndex}>
+          {row.map((value, cellIndex) => (
+            <Cell key={`${rowIndex}${cellIndex}`}>
+              {rowIndex === 0 ? <Header>{value}</Header> : value}
+            </Cell>
           ))}
         </Row>
       ))}
