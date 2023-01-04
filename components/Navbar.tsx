@@ -5,15 +5,25 @@ import {
   NavLinkWrapper,
 } from "../styles/Navbar.styled"
 import logo from "../assets/logo.svg"
+import Link from "next/link"
 
 export default function Navbar() {
   return (
     <NavbarContainer>
-      <Image src={logo} alt="logo" height={40} />
+      <Link href="/">
+        <Image src={logo} alt="logo" height={40} />
+      </Link>
+
       <NavLinkWrapper>
-        <NavLink>Home</NavLink>
-        <NavLink>Feedback</NavLink>
-        <NavLink>Typing Stats</NavLink>
+        <NavLink>
+          <Link href="/">Home</Link>
+        </NavLink>
+        <NavLink>
+          <Link href="/">Feedback</Link>
+        </NavLink>
+        <NavLink>
+          <Link href="/stats">Stats</Link>
+        </NavLink>
       </NavLinkWrapper>
     </NavbarContainer>
   )

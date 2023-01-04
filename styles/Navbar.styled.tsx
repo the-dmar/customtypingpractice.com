@@ -16,4 +16,8 @@ export const NavLink = styled.li`
   font-size: 1.05vw;
   color: #575f66;
   font-weight: 600;
+
+  & > * {
+    text-decoration: none;
+  }
 `
