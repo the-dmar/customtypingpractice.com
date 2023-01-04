@@ -35,15 +35,8 @@ interface Keystroke {
 export const TypingContext = createContext<TextContextInterface | null>(null)
 
 const TypingContextProvider = ({ children }: Children) => {
-  const [
-    text,
-    input,
-    setInput,
-    ,
-    incorrectCharacters,
-    getRandomText,
-    savedCharacterStats,
-  ] = useTypingText()
+  const [text, input, setInput, getRandomText, savedCharacterStats] =
+    useTypingText()
   const [keystrokes, setKeystrokes] = useState<Keystroke[]>([])
   const [inputHistory, setInputHistory] = useState<string[]>([])
   const [textHistory, setTextHistory] = useState<string[]>([])

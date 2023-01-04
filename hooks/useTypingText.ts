@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import sentences from "../text/sentences"
 import getCurrentWord from "../utils/getCurrentWord"
 import getRandomArrayItem from "../utils/getRandomArrayItem"
@@ -26,12 +26,12 @@ export default function useTypingText() {
 
   const getRandomText = () => setText(getRandomArrayItem(sentences))
 
-  const newBlock = () => {
+  const newBlock = useCallback(() => {
     getRandomText()
     setInput("")
-  }
+  }, [])
 
-  const validateAndCorrectInput = (value: string) => {
+  const validateAndCorrectInput = useCallback((value: string) => {
     const lastTyped = value[value.length - 1]
     const correctCharacter = text[value.length - 1]
 
@@ -57,32 +57,24 @@ export default function useTypingText() {
     if (correctCharacter === " " && lastTyped !== " ") {
       setInput(value.slice(0, -1) + " ")
     } else setInput(value)
-  }
+  }, [])
 
-  const updateSavedCharacterStats = (
-    lastTyped: string,
-    correctCharacter: string
-  ) => {
-    let newSavedCharacterStats = [...savedCharacterStats]
+  const updateSavedCharacterStats = useCallback(
+    (lastTyped: string, correctCharacter: string) => {
+      let newSavedCharacterStats = [...savedCharacterStats]
 
-    const characterResult =
-      correctCharacter === lastTyped ? "correct" : "incorrect"
+      const characterResult =
+        correctCharacter === lastTyped ? "correct" : "incorrect"
 
-    const characterIndex = savedCharacterStats.findIndex(
-      ({ character }) => character === correctCharacter.toUpperCase()
-    )
+      const characterIndex = savedCharacterStats.findIndex(
+        ({ character }) => character === correctCharacter.toUpperCase()
+      )
 
-    newSavedCharacterStats[characterIndex][characterResult]++
-    setSavedCharacterStats(newSavedCharacterStats)
-  }
+      newSavedCharacterStats[characterIndex][characterResult]++
+      setSavedCharacterStats(newSavedCharacterStats)
+    },
+    []
+  )
 
-  return [
-    text,
-    input,
-    validateAndCorrectInput,
-    incorrectCharacters,
-    incorrectWords,
-    getRandomText,
-    savedCharacterStats,
-  ] as const
+  return [text, input, setInput, getRandomText, savedCharacterStats] as const
 }

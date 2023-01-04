@@ -9,8 +9,6 @@ import {
   MainResult,
   ResultList,
   ResultListItem,
-  HorizontalLine,
-  VerticalLine,
   MiddleRow,
   OuterRow,
   RestartInstructionsPrimary,
@@ -41,8 +39,6 @@ export default function TestResults() {
   ]
 
   const incorrectCharacters = () => incorrectKeystrokes().map(({ key }) => key)
-
-  // const incorrectCharacters
 
   return (
     <TestResultContainer>

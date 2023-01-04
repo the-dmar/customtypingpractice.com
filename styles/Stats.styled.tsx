@@ -10,7 +10,7 @@ export const StatTable = styled.div`
 
 export const Header = styled.h3`
   color: var(--Blue);
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   margin-bottom: 0.5rem;
 `
 
@@ -41,8 +41,6 @@ export const Cell = styled.span`
   :first-child {
     font-weight: 800;
     color: var(--Orange);
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
-
-  /* width: 110%; */
 `

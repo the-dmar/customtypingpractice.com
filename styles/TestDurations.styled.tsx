@@ -9,10 +9,6 @@ export const DurationButtonContainer = styled.div`
   padding-bottom: 2rem;
 `
 
-export const DurationButtonWrapper = styled.div`
-  display: flex;
-`
-
 export const DurationButton = styled.button<TestDurationProps>`
   outline: none;
   background: none;
@@ -25,11 +21,4 @@ export const DurationButton = styled.button<TestDurationProps>`
   &:hover {
     transition: all 0.5s ease;
   }
-`
-
-export const Divider = styled.div`
-  background: var(--Black);
-  width: 1px;
-  height: auto;
-  margin: 1rem;
 `

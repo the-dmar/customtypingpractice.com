@@ -1,8 +1,6 @@
 import useTypingContext from "../hooks/useTypingContext"
 import {
-  Divider,
   DurationButton,
-  DurationButtonWrapper,
   DurationButtonContainer,
 } from "../styles/TestDurations.styled"
 

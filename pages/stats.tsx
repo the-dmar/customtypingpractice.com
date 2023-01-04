@@ -1,6 +1,5 @@
 import useTypingContext from "../hooks/useTypingContext"
 import { Cell, Header, Row, StatTable } from "../styles/Stats.styled"
-import { HorizontalLine } from "../styles/TestResults.styled"
 import calculateAccuracy from "../utils/calculateAccuracy"
 
 export default function Stats() {

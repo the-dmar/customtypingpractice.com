@@ -7,7 +7,6 @@ interface ResultWrapperProps {
 export const TestResultContainer = styled.main`
   display: flex;
   flex-direction: column;
-  /* outline: 1px solid red; */
   padding: 0 2rem;
   width: 100%;
 `
@@ -58,7 +57,6 @@ export const ResultColumn = styled.div`
   margin: 0 2rem;
   border-radius: 4px;
   padding: 1rem 0;
-  /* outline: 1px solid green; */
 `
 
 export const ResultWrapper = styled.div<ResultWrapperProps>`
@@ -66,7 +64,6 @@ export const ResultWrapper = styled.div<ResultWrapperProps>`
   flex-direction: column;
   align-items: center;
   justify-content: ${({ alignment }) => alignment};
-  /* outline: 1px solid blue; */
   height: 100%;
   max-height: 16rem;
 `
@@ -93,6 +90,3 @@ export const ResultListItem = styled.li`
   font-size: 1.1rem;
   text-align: center;
 `
-
-export const HorizontalLine = styled.div``
-export const VerticalLine = styled.li``
