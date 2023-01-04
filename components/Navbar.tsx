@@ -11,7 +11,9 @@ export default function Navbar() {
   return (
     <NavbarContainer>
       <Link href="/">
-        <Image src={logo} alt="logo" height={40} />
+        <NavLink>
+          <Image src={logo} alt="logo" height={40} />
+        </NavLink>
       </Link>
 
       <NavLinkWrapper>

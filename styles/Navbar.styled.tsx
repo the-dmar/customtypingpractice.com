@@ -4,11 +4,13 @@ export const NavbarContainer = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 0.5rem 2rem;
+  background: var(--Blue);
 `
 
 export const NavLinkWrapper = styled.ul`
   display: flex;
+  align-items: center;
 `
 export const NavLink = styled.li`
   list-style: none;
@@ -16,8 +18,14 @@ export const NavLink = styled.li`
   font-size: 1.05vw;
   color: #575f66;
   font-weight: 600;
+  display: flex;
 
   & > * {
     text-decoration: none;
+    color: white;
+  }
+
+  &:first-child {
+    margin-left: 0;
   }
 `

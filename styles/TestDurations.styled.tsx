@@ -17,9 +17,9 @@ export const DurationButton = styled.button<TestDurationProps>`
   outline: none;
   background: none;
   border: none;
-  color: ${({ selected }) => (selected ? "var(--Blue)" : "var(--Black)")};
-  font-weight: ${({ selected }) => (selected ? "700" : "500")};
-  font-size: 1vw;
+  color: ${({ selected }) => (selected ? "var(--Orange)" : "var(--Black)")};
+  font-weight: ${({ selected }) => (selected ? "800" : "600")};
+  font-size: 1.3vw;
   cursor: pointer;
 `
 

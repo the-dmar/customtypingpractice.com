@@ -40,6 +40,7 @@ export const Cell = styled.span`
   font-weight: 600;
   :first-child {
     font-weight: 800;
+    color: var(--Orange);
     font-size: 1.4rem;
   }
 
