@@ -31,7 +31,7 @@ export default function useTypingText() {
     setInput("")
   }, [])
 
-  const validateAndCorrectInput = useCallback((value: string) => {
+  const validateAndCorrectInput = (value: string) => {
     const lastTyped = value[value.length - 1]
     const correctCharacter = text[value.length - 1]
 
@@ -57,7 +57,7 @@ export default function useTypingText() {
     if (correctCharacter === " " && lastTyped !== " ") {
       setInput(value.slice(0, -1) + " ")
     } else setInput(value)
-  }, [])
+  }
 
   const updateSavedCharacterStats = useCallback(
     (lastTyped: string, correctCharacter: string) => {
