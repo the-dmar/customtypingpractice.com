@@ -7,7 +7,7 @@ import useTypingContext from "../hooks/useTypingContext"
 import { Details } from "../styles/Home.styled"
 
 export default function Home() {
-  const { input, handleInput, wpm, accuracy, timer, testDuration } =
+  const { input, handleInput, wpm, accuracy, timer, testDuration, keystrokes } =
     useTypingContext()
 
   return timer ? (
@@ -16,6 +16,7 @@ export default function Home() {
         {timer === testDuration ? <TestDurations /> : <Timer />}
       </Details>
       <GuidedText />
+      <pre style={{ whiteSpace: "pre-wrap" }}>{JSON.stringify(keystrokes)}</pre>
     </>
   ) : (
     <TestResults />
